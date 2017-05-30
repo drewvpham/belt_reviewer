@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Welcome</title>
+
+    {% load staticfiles %}
+
+      <link rel="stylesheet" href="{% static 'belt_reviewer/css/book.css' %}">
+      <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+  </head>
+  <body>
+
+    <h1>Welcome, {{name}}</h1>
+
+
+    <div class='topcorner'>
+      <a href="{% url 'add_book'%}">Add Book and Review</a>
+      <a href="{% url 'logout'%}">Logout</a>
+    </div>
+
+    <h3>Recent Book Reviews:</h3>
+    {%for book in books%}
+      <p><h4>{{book.title}}</h4>by {{book.author}}</p>
+      <p><a href='users/{{book.reviews.first.reviewer.id}}'>{{book.reviews.first.reviewer.first_name}}</a>says, "{{book.reviews.first.content}}"</p>
+      <p>Posted on {{book.reviews.first.created_at}}</p>
+    {%endfor%}
+
+  </body>
+</html>

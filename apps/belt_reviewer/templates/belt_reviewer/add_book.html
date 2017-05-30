@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Add Book and Review</title>
+  {% load staticfiles %}
+
+    <link rel="stylesheet" href="{% static 'belt_reviewer/css/book.css' %}">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+
+  </head>
+  <body>
+    <div class='topcorner'>
+      <a href="{% url 'landing'%}">Home</a>
+      <a href="{% url 'logout'%}">Logout</a>
+    </div>
+    <h3>Add a New Book Title and a review: </h3>
+
+
+    <form action="{% url 'add_book' %}" method='post'>
+      {% csrf_token %}
+      <label>Book Title:</label>
+      <input type='text' name='title'>
+      <p></p>
+      <label>Author:</label><p></p>
+      <label>Choose from the list:</label><select>
+        <option value="none">None</option>
+        {%for each in authors%}
+        <option value="{{each.author}}">{{each.author}}</option>
+        {%endfor%}
+      </select><p></p>
+      <label>Or add a new author:</label>
+        <input type='text' name='author'>
+      <p></p>
+      <label>Review:</label>
+      <textarea name='review' rows="15" cols='90'></textarea>
+      <p></p>
+
+
+      <div class="stars">
+        <input class="star star-5" id="star-5" type="radio" name="star"/>
+        <label class="star star-5" for="star-5"></label>
+        <input class="star star-4" id="star-4" type="radio" name="star"/>
+        <label class="star star-4" for="star-4"></label>
+        <input class="star star-3" id="star-3" type="radio" name="star"/>
+        <label class="star star-3" for="star-3"></label>
+        <input class="star star-2" id="star-2" type="radio" name="star"/>
+        <label class="star star-2" for="star-2"></label>
+        <input class="star star-1" id="star-1" type="radio" name="star"/>
+        <label class="star star-1" for="star-1"></label>
+    </div>
+      <p>
+      <input type='submit' value='Add Book and Review'>
+
+  </form>
+
+
+  </body>
+</html>
